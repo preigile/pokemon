@@ -6,7 +6,9 @@
   "author": "preigile <diva.artim@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build:dev": "set NODE_ENV=development & webpack --config webpack.config.js"
+    "build:dev": "set NODE_ENV=development & webpack --config webpack.config.js",
+    "build:prod": "set NODE_ENV=production & webpack --config webpack.config.js",
+    "start": "set NODE_ENV=development & webpack-dev-server"
   },
   "dependencies": {
     "react": "^17.0.2",
