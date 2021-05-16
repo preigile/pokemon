@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
 
 import s from './style.module.scss';
 
@@ -8,7 +9,11 @@ import PokeBallPng from './assets/PokeBall2.png';
 import CloudBigPng from './assets/CloudBig.png';
 import PikachuPng from './assets/Pikachu.png';
 
-const Parallax = () => {
+interface ParallaxProps {
+  className?: string;
+}
+
+const Parallax: React.FC<ParallaxProps> = ({ className }) => {
   const [screenX, setScreenX] = useState(0);
   const [screenY, setScreenY] = useState(0);
 
@@ -24,7 +29,7 @@ const Parallax = () => {
   }, [screenX, screenY]);
 
   return (
-    <div className={s.root}>
+    <div className={cn(s.root, className)}>
       <div
         className={s.smallPokeBall}
         style={{

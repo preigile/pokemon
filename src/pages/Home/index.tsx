@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 
 import s from './Home.module.scss';
 import Parallax from './Parallax';
+import Heading from '../../components/Heading';
 
 const HomePage = () => {
   return (
@@ -12,13 +13,15 @@ const HomePage = () => {
       <Header />
       <Layout className={s.contentWrap}>
         <div className={s.contentText}>
-          <h1>
+          <Heading as="h1">
             <b>Find</b> all your favorite <b>Pokemon</b>
-          </h1>
-          <p>You can know this type of Pokemon, its strengths, disadvantages and abilities</p>
+          </Heading>
+          <Heading as="h3" className={s.description}>
+            You can know this type of Pokemon, its strengths, disadvantages and abilities
+          </Heading>
           <Button onClick={() => {}}>See pokemon</Button>
         </div>
-        <Parallax />
+        <Parallax className={s.contentParallax} />
       </Layout>
     </div>
   );
