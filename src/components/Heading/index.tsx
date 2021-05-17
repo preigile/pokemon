@@ -11,7 +11,9 @@ interface HeadingProps {
 }
 
 const Heading: React.FC<HeadingProps> = ({ children, className, as }) => {
-  return <div className={cn(s.root, className, s[as])}>{children}</div>;
+  const Tag = as as keyof JSX.IntrinsicElements;
+
+  return <Tag className={cn(s.root, className)}>{children}</Tag>;
 };
 
 export default Heading;
