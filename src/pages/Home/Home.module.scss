@@ -1,0 +1,27 @@
+@import '../../variables';
+
+.root {
+  min-height: 100vh;
+  background: linear-gradient(180deg, $third 0%, $primary 100%);
+  padding-bottom: 150px;
+  overflow: hidden;
+}
+
+.contentWrap {
+  padding-top: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentText {
+  padding-top: 128px;
+}
+
+.description {
+  margin-top: 32px;
+  margin-bottom: 48px;
+}
+
+.contentParallax {
+  min-width: 700px;
+}

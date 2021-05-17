@@ -1,10 +1,9 @@
 import React from 'react';
-import cn from 'classnames';
-
-import style from './App.module.scss';
+import HomePage from './pages/Home';
+import './index.css';
 
 const App = () => {
-  return <div className={cn(style.header, 'color')}>This is app content!</div>;
+  return <HomePage />;
 };
 
 export default App;
