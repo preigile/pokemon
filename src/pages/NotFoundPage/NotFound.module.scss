@@ -1,0 +1,37 @@
+@import '../../variables';
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $danger;
+}
+
+.wrap {
+  display: flex;
+}
+
+.layer {
+  display: flex;
+}
+
+.errorText {
+  font-weight: bold;
+  font-size: 700px;
+  line-height: 818px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 4px;
+}
+
+.subTitle {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 56px;
+
+  .whiteText {
+    color: $white;
+  }
+}

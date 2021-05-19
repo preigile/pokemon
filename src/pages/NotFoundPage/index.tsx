@@ -1,0 +1,27 @@
+import React from 'react';
+import { navigate } from 'hookrouter';
+
+import TeamRocket from './assets/Team_Rocket.png';
+import s from './NotFound.module.scss';
+import Button from '../../components/Button';
+
+const NotFound = () => {
+  return (
+    <div className={s.root}>
+      <div className={s.wrap}>
+        <div className={s.errorText}>404</div>
+        <div className={s.layer}>
+          <img src={TeamRocket} alt="Team Rocket" />
+          <div className={s.subTitle}>
+            <span className={s.whiteText}>The rocket team</span> has won this time.
+          </div>
+          <Button color="yellow" onClick={() => navigate('/')}>
+            Return
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NotFound;
