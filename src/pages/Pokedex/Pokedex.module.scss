@@ -1,0 +1,13 @@
+@import '../../variables';
+
+.root {
+  min-height: 100vh;
+  background: $white;
+  padding-bottom: 150px;
+  overflow: hidden;
+}
+
+.title {
+  padding-top: 73px;
+  text-align: center;
+}
