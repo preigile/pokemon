@@ -1,18 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import s from './Pokedex.module.scss';
-import pokemons from './pokemons-dats';
 
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
+import { IPokemon } from '../../models/pokemon.model';
 
 const PokedexPage = () => {
+  const [totalPokemons, setTotalPokemons] = useState<number>(0);
+  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch('http://zar.hosthot.ru/api/v1/pokemons')
+      .then((res) => res.json())
+      .then((data) => {
+        setTotalPokemons(data.total);
+        setPokemons(data.pokemons);
+        setIsError(false);
+      })
+      .catch(() => {
+        setIsError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Ups!</div>;
+  }
+
   return (
     <div className={s.root}>
       <Layout>
         <Heading as="h3" className={s.title}>
-          800 <b>Pokemons</b> for you to choose your favorite
+          {totalPokemons} <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <input type="text" />
         <div>filter</div>
