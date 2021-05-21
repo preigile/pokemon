@@ -19,7 +19,15 @@ const PokedexPage = () => {
         <input type="text" />
         <div>filter</div>
         {pokemons.map((pokemon) => {
-          return <PokemonCard name={pokemon.name} stats={pokemon.stats} types={pokemon.types} img={pokemon.img} />;
+          return (
+            <PokemonCard
+              key={pokemon.name}
+              name={pokemon.name}
+              stats={pokemon.stats}
+              types={pokemon.types}
+              img={pokemon.img}
+            />
+          );
         })}
       </Layout>
     </div>
