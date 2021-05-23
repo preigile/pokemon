@@ -12,10 +12,12 @@ const NotFound = () => {
       <div className={s.wrap}>
         <div className={s.errorText}>404</div>
         <div className={s.layer}>
-          <img src={TeamRocket} alt="Team Rocket" />
-          <div className={s.subTitle}>
-            <span className={s.whiteText}>The rocket team</span> has won this time.
-          </div>
+          <figure>
+            <img src={TeamRocket} alt="Team Rocket" />
+            <figcaption className={s.subTitle}>
+              <span className={s.whiteText}>The rocket team</span> has won this time.
+            </figcaption>
+          </figure>
           <Button color="yellow" onClick={() => navigate(LinkEnum.HOME)}>
             Return
           </Button>

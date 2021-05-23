@@ -32,9 +32,9 @@ const PokemonCard: React.FC<IPokemon> = ({ name, stats, types, img }) => {
           })}
         </div>
       </div>
-      <div className={s.pictureWrap}>
+      <figure className={s.pictureWrap}>
         <img src={img} alt={name} />
-      </div>
+      </figure>
     </div>
   );
 };

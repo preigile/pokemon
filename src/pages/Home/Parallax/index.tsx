@@ -30,41 +30,41 @@ const Parallax: React.FC<ParallaxProps> = ({ className }) => {
 
   return (
     <div className={cn(s.root, className)}>
-      <div
+      <figure
         className={s.smallPokeBall}
         style={{
           transform: `translate(${screenY * 0.04}px, ${screenX * 0.04}px`,
         }}>
         <img src={SmallPokeBallPng} alt="Small PokeBall" />
-      </div>
-      <div
+      </figure>
+      <figure
         className={s.cloud}
         style={{
           transform: `translate(${screenY * 0.01}px, ${screenX * 0.01}px`,
         }}>
         <img src={CloudPng} alt="Cloud PokeBall" />
-      </div>
-      <div
+      </figure>
+      <figure
         className={s.cloudBig}
         style={{
           transform: `translate(${screenY * 0.01}px, ${screenX * 0.01}px`,
         }}>
         <img src={CloudBigPng} alt="Cloud Big PokeBall" />
-      </div>
-      <div
+      </figure>
+      <figure
         className={s.pokeBall}
         style={{
           transform: `translate(${screenY * 0.03}px, ${screenX * 0.03}px`,
         }}>
         <img src={PokeBallPng} alt="Big PokeBall" />
-      </div>
-      <div
+      </figure>
+      <figure
         className={s.pikachu}
         style={{
           transform: `translate(${screenY * 0.06}px, ${screenX * 0.06}px`,
         }}>
         <img src={PikachuPng} alt="Cloud PokeBall" />
-      </div>
+      </figure>
     </div>
   );
 };
