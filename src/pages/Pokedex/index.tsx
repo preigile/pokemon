@@ -5,30 +5,47 @@ import s from './Pokedex.module.scss';
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
-import { IPokemon } from '../../models/pokemon.model';
+import { IPokemons } from '../../models/pokemons.model';
 
-const PokedexPage = () => {
-  const [totalPokemons, setTotalPokemons] = useState<number>(0);
-  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
+const InitData: IPokemons = {
+  count: 0,
+  limits: 0,
+  offset: 0,
+  total: 0,
+  pokemons: [],
+};
+
+const usePokemons = () => {
+  const [data, setData] = useState<IPokemons>(InitData);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch('http://zar.hosthot.ru/api/v1/pokemons')
-      .then((res) => res.json())
-      .then((data) => {
-        setTotalPokemons(data.total);
-        setPokemons(data.pokemons);
-        setIsError(false);
-      })
-      .catch(() => {
+    const getPokemons = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
+        const result = await response.json();
+
+        setData(result);
+      } catch (error) {
         setIsError(true);
-      })
-      .finally(() => {
+      } finally {
         setIsLoading(false);
-      });
+      }
+    };
+    getPokemons();
   }, []);
+
+  return {
+    data,
+    isLoading,
+    isError,
+  };
+};
+
+const PokedexPage = () => {
+  const { data, isLoading, isError } = usePokemons();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -42,11 +59,11 @@ const PokedexPage = () => {
     <div className={s.root}>
       <Layout>
         <Heading as="h3" className={s.title}>
-          {totalPokemons} <b>Pokemons</b> for you to choose your favorite
+          {data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <input type="text" />
         <div>filter</div>
-        {pokemons.map((pokemon) => {
+        {data.pokemons.map((pokemon) => {
           return (
             <PokemonCard
               key={pokemon.name}
