@@ -6,6 +6,7 @@ import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import { IPokemons } from '../../models/pokemons.model';
+import req from '../../utils/request';
 
 const InitData: IPokemons = {
   count: 0,
@@ -24,8 +25,7 @@ const usePokemons = () => {
     const getPokemons = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
-        const result = await response.json();
+        const result = await req('getPokemons');
 
         setData(result);
       } catch (error) {
