@@ -1,8 +1,8 @@
 import Url from 'url';
 import getUrlWithParamsConfig from './getUrlWithParamsConfig';
-import config from '../config';
+import Endpoints from '../enums/endpoints';
 
-async function req(endpoint: keyof typeof config.client.endpoint) {
+async function req(endpoint: Endpoints) {
   const uri = Url.format(getUrlWithParamsConfig(endpoint));
   const result = await fetch(uri).then((res) => res.json());
 
