@@ -1,34 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import s from './Pokedex.module.scss';
-import pokemons from './pokemons-dats';
 
 import Heading from '../../components/Heading';
-import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
+import { IPokemons } from '../../models/pokemons.model';
+import req from '../../utils/request';
+import Endpoints from '../../enums/endpoints';
+
+const usePokemons = () => {
+  const [data, setData] = useState<IPokemons | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getPokemons = async () => {
+      setIsLoading(true);
+      try {
+        const result = await req(Endpoints.GetPokemons);
+
+        setData(result);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getPokemons();
+  }, []);
+
+  return {
+    data,
+    isLoading,
+    isError,
+  };
+};
 
 const PokedexPage = () => {
+  const { data, isLoading, isError } = usePokemons();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Ups!</div>;
+  }
+
   return (
     <div className={s.root}>
-      <Header />
       <Layout>
         <Heading as="h3" className={s.title}>
-          800 <b>Pokemons</b> for you to choose your favorite
+          {data && data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <input type="text" />
         <div>filter</div>
-        {pokemons.map((pokemon) => {
-          return (
-            <PokemonCard
-              key={pokemon.name}
-              name={pokemon.name}
-              stats={pokemon.stats}
-              types={pokemon.types}
-              img={pokemon.img}
-            />
-          );
-        })}
+        {data &&
+          data.pokemons.map((pokemon) => {
+            return (
+              <PokemonCard
+                key={pokemon.name}
+                name={pokemon.name}
+                stats={pokemon.stats}
+                types={pokemon.types}
+                img={pokemon.img}
+              />
+            );
+          })}
       </Layout>
     </div>
   );
