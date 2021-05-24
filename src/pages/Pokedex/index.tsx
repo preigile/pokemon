@@ -1,44 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import s from './Pokedex.module.scss';
 
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
-import { IPokemons } from '../../models/pokemons.model';
-import req from '../../utils/request';
+import useData from '../../hook/getData';
 import Endpoints from '../../enums/endpoints';
-
-const usePokemons = () => {
-  const [data, setData] = useState<IPokemons | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-
-  useEffect(() => {
-    const getPokemons = async () => {
-      setIsLoading(true);
-      try {
-        const result = await req(Endpoints.GetPokemons);
-
-        setData(result);
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getPokemons();
-  }, []);
-
-  return {
-    data,
-    isLoading,
-    isError,
-  };
-};
+import { IPokemons } from '../../models/pokemons.model';
 
 const PokedexPage = () => {
-  const { data, isLoading, isError } = usePokemons();
+  const { data, isLoading, isError } = useData<IPokemons>(Endpoints.GetPokemons);
 
   if (isLoading) {
     return <div>Loading...</div>;
