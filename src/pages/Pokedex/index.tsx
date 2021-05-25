@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import s from './Pokedex.module.scss';
 
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
+import Loading from '../../components/Loading';
 import PokemonCard from '../../components/PokemonCard';
 import useData from '../../hook/getData';
 import Endpoints from '../../enums/endpoints';
 import { IPokemons } from '../../models/pokemons.model';
 
 const PokedexPage = () => {
-  const { data, isLoading, isError } = useData<IPokemons>(Endpoints.GetPokemons);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [query, setQuery] = useState<object>({});
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { data, isLoading, isError } = useData<IPokemons>(Endpoints.GetPokemons, query, [searchValue]);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    setQuery((s) => ({
+      ...s,
+      name: event.target.value,
+    }));
+  };
 
   if (isError) {
     return <div>Ups!</div>;
@@ -26,20 +34,26 @@ const PokedexPage = () => {
         <Heading as="h3" className={s.title}>
           {data && data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
-        <input type="text" />
+        <input type="text" value={searchValue} onChange={handleSearchChange} />
         <div>filter</div>
-        {data &&
-          data.pokemons.map((pokemon) => {
-            return (
-              <PokemonCard
-                key={pokemon.name}
-                name={pokemon.name}
-                stats={pokemon.stats}
-                types={pokemon.types}
-                img={pokemon.img}
-              />
-            );
-          })}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className={s.pokemonsContainer}>
+            {data &&
+              data.pokemons.map((pokemon) => {
+                return (
+                  <PokemonCard
+                    key={pokemon.name}
+                    name={pokemon.name}
+                    stats={pokemon.stats}
+                    types={pokemon.types}
+                    img={pokemon.img}
+                  />
+                );
+              })}
+          </div>
+        )}
       </Layout>
     </div>
   );

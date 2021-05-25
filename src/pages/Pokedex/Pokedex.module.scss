@@ -11,3 +11,12 @@
   padding-top: 73px;
   text-align: center;
 }
+
+.pokemonsContainer {
+  width: 100%;
+  display: grid;
+  grid-gap: 45px 35px;
+  grid-template-columns: repeat(auto-fill, 351px);
+  align-items: center;
+  justify-content: center;
+}

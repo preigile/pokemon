@@ -8,7 +8,7 @@ interface IResult<T> {
   isError: boolean;
 }
 
-const useData = <T>(endpoint: Endpoints): IResult<T> => {
+const useData = <T>(endpoint: Endpoints, query: object, deps: unknown[] = []): IResult<T> => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const useData = <T>(endpoint: Endpoints): IResult<T> => {
     const getData = async () => {
       setIsLoading(true);
       try {
-        const result = await req(endpoint);
+        const result = await req(endpoint, query);
 
         setData(result);
       } catch (error) {
@@ -27,7 +27,7 @@ const useData = <T>(endpoint: Endpoints): IResult<T> => {
       }
     };
     getData();
-  }, []);
+  }, deps);
 
   return {
     data,
