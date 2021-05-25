@@ -10,16 +10,21 @@ import useData from '../../hook/getData';
 import Endpoints from '../../enums/endpoints';
 import { IPokemons } from '../../interface/pokemons';
 import { IPokemon } from '../../interface/pokemon';
+import useDebounce from '../../hook/useDebounce';
 
 interface IQuery {
+  limit: number;
   name?: string;
 }
 
 const PokedexPage = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [query, setQuery] = useState<IQuery>({});
+  const [query, setQuery] = useState<IQuery>({
+    limit: 12,
+  });
+  const debounceValue = useDebounce(searchValue, 500);
 
-  const { data, isLoading, isError } = useData<IPokemons>(Endpoints.GetPokemons, query, [searchValue]);
+  const { data, isLoading, isError } = useData<IPokemons>(Endpoints.GetPokemons, query, [debounceValue]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
