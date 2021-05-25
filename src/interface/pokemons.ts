@@ -1,4 +1,4 @@
-import { IPokemon } from './pokemon.model';
+import { IPokemon } from './pokemon';
 
 export interface IPokemons {
   count: number;

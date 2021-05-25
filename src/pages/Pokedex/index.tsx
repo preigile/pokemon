@@ -8,18 +8,23 @@ import Loading from '../../components/Loading';
 import PokemonCard from '../../components/PokemonCard';
 import useData from '../../hook/getData';
 import Endpoints from '../../enums/endpoints';
-import { IPokemons } from '../../models/pokemons.model';
+import { IPokemons } from '../../interface/pokemons';
+import { IPokemon } from '../../interface/pokemon';
+
+interface IQuery {
+  name?: string;
+}
 
 const PokedexPage = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [query, setQuery] = useState<object>({});
+  const [query, setQuery] = useState<IQuery>({});
 
   const { data, isLoading, isError } = useData<IPokemons>(Endpoints.GetPokemons, query, [searchValue]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
-    setQuery((s) => ({
-      ...s,
+    setQuery((state: IQuery) => ({
+      ...state,
       name: event.target.value,
     }));
   };
@@ -41,7 +46,7 @@ const PokedexPage = () => {
         ) : (
           <div className={s.pokemonsContainer}>
             {data &&
-              data.pokemons.map((pokemon) => {
+              data.pokemons.map((pokemon: IPokemon) => {
                 return (
                   <PokemonCard
                     key={pokemon.name}

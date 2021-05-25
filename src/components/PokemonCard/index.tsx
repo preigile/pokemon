@@ -3,7 +3,7 @@ import React from 'react';
 import s from './PokemonCard.module.scss';
 
 import Heading from '../Heading';
-import { IPokemon } from '../../models/pokemon.model';
+import { IPokemon } from '../../interface/pokemon';
 
 const PokemonCard: React.FC<IPokemon> = ({ name, stats, types, img }) => {
   return (
