@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { navigate } from 'hookrouter';
 
 import s from './Pokedex.module.scss';
 
@@ -11,6 +12,7 @@ import Endpoints from '../../enums/endpoints';
 import { IPokemons } from '../../interface/pokemons';
 import { IPokemon } from '../../interface/pokemon';
 import useDebounce from '../../hook/useDebounce';
+import { LinkEnum } from '../../routes';
 
 interface IQuery {
   limit: number;
@@ -52,16 +54,9 @@ const PokedexPage = () => {
           <div className={s.pokemonsContainer}>
             {data &&
               data.pokemons.map((pokemon: IPokemon) => {
-                return (
-                  <PokemonCard
-                    key={pokemon.name}
-                    name={pokemon.name}
-                    stats={pokemon.stats}
-                    types={pokemon.types}
-                    img={pokemon.img}
-                  />
-                );
+                return <PokemonCard pokemon={pokemon} onClick={() => navigate(`${LinkEnum.POKEDEX}/${pokemon.id}`)} />;
               })}
+            )
           </div>
         )}
       </Layout>

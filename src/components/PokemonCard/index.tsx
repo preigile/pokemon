@@ -5,25 +5,30 @@ import s from './PokemonCard.module.scss';
 import Heading from '../Heading';
 import { IPokemon } from '../../interface/pokemon';
 
-const PokemonCard: React.FC<IPokemon> = ({ name, stats, types, img }) => {
+interface PokemonProps {
+  pokemon: IPokemon;
+  onClick: () => void;
+}
+
+const PokemonCard: React.FC<PokemonProps> = ({ pokemon, onClick }) => {
   return (
-    <div className={s.root}>
+    <div role="button" tabIndex={0} className={s.root} onClick={onClick} onKeyDown={onClick}>
       <div className={s.infoWrap}>
         <Heading as="h4" className={s.titleName}>
-          {name}
+          {pokemon.name}
         </Heading>
         <div className={s.statWrap}>
           <div className={s.statItem}>
-            <div className={s.statValue}>{stats.attack}</div>
+            <div className={s.statValue}>{pokemon.stats.attack}</div>
             Attack
           </div>
           <div className={s.statItem}>
-            <div className={s.statValue}>{stats.defense}</div>
+            <div className={s.statValue}>{pokemon.stats.defense}</div>
             Defense
           </div>
         </div>
         <div className={s.labelWrap}>
-          {types.map((type) => {
+          {pokemon.types.map((type) => {
             return (
               <span className={s.label} key={type}>
                 {type}
@@ -33,7 +38,7 @@ const PokemonCard: React.FC<IPokemon> = ({ name, stats, types, img }) => {
         </div>
       </div>
       <figure className={s.pictureWrap}>
-        <img src={img} alt={name} />
+        <img src={pokemon.img} alt={pokemon.name} />
       </figure>
     </div>
   );
