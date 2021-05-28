@@ -1,0 +1,19 @@
+@import '../../variables';
+
+.root {
+  height: 371px;
+  width: 797px;
+  background: linear-gradient(180deg, #732119 42.19%, $danger 100%);
+  border-radius: 16px;
+}
+
+.pictureWrap {
+  width: 365px;
+  height: 100%;
+  background: $danger;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,10 +1,21 @@
 import config from '../config';
 import Endpoints from '../enums/endpoints';
 
-function getUrlWithParamsConfig(endpointConfig: Endpoints) {
+function getUrlWithParamsConfig(endpointConfig: Endpoints, query: object, params?: any) {
+  const uri = { ...config.client.endpoint[endpointConfig].uri };
+  if (params) {
+    for (const key in params) {
+      if ({}.hasOwnProperty.call(params, key)) {
+        uri.pathname = uri.pathname.replace(`:${key}`, `${params[key]}`);
+      }
+    }
+  }
   return {
     ...config.client.server,
-    ...config.client.endpoint[endpointConfig].uri,
+    ...uri,
+    query: {
+      ...query,
+    },
   };
 }
 
