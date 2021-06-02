@@ -13,7 +13,7 @@ export interface PokemonProps {
 }
 
 const PokemonPage: React.FC<PokemonProps> = ({ id }) => {
-  const { data, isLoading, isError } = useData<IPokemon>(Endpoints.GetPokemon, {}, [], { id });
+  const { data, isLoading, isError } = useData<IPokemon>(Endpoints.GetPokemon, { id }, []);
 
   if (isError) {
     return <div>Ups!</div>;

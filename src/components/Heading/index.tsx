@@ -10,7 +10,7 @@ interface HeadingProps {
   as: HeadingSize;
 }
 
-const Heading: React.FC<HeadingProps> = ({ children, className, as }) => {
+const Heading: React.FC<HeadingProps> = ({ children, className, as = 'h2' }) => {
   const Tag = as as keyof JSX.IntrinsicElements;
 
   return <Tag className={cn(s.root, className)}>{children}</Tag>;
