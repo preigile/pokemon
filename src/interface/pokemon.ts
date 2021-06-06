@@ -2,8 +2,8 @@ interface Stats {
   attack: number;
   defense: number;
   hp?: number;
-  specialAttack?: number;
-  specialDefense?: number;
+  special_attack?: number;
+  special_defense?: number;
   speed?: number;
 }
 
@@ -12,12 +12,12 @@ export interface IPokemon {
   stats: Stats;
   types: string[];
   img: string;
-  nameClean?: string;
+  name_clean?: string;
   abilities?: string[];
-  baseExperience?: number;
+  base_experience?: number;
   height?: number;
   id?: number;
-  isDefault?: boolean;
+  is_default?: boolean;
   order?: number;
   weight?: number;
 }
