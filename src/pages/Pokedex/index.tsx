@@ -57,7 +57,7 @@ const PokedexPage = () => {
         </Heading>
         <input type="text" value={searchValue} onChange={handleSearchChange} />
         <div>filter</div>
-        <div>{isTypesLoading ? <Loading /> : types?.map((item) => <div>{item}</div>)}</div>
+        <div>{isTypesLoading ? <Loading /> : types?.map((item) => <div key={item}>{item}</div>)}</div>
         {isLoading ? (
           <Loading />
         ) : (
