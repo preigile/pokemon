@@ -9,9 +9,11 @@ import './index.css';
 
 const store = configureStore({});
 
-ReactDom.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'),
-);
+window.addEventListener('load', () => {
+  ReactDom.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root'),
+  );
+});

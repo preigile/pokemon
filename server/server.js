@@ -17,6 +17,12 @@ const init = async () => {
 
   server.route({
     method: 'GET',
+    path: '/main.css',
+    handler: (request, h) => h.file(path.join(process.cwd(), 'dist', 'main.css')),
+  });
+
+  server.route({
+    method: 'GET',
     path: '/main.js',
     handler: (request, h) => h.file(path.join(process.cwd(), 'dist', 'main.js')),
   });
