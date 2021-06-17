@@ -4,6 +4,7 @@ enum Endpoints {
   CreatePokemon = 'createPokemon',
   UpdatePokemon = 'updatePokemon',
   DeletePokemon = 'deletePokemon',
+  GetPokemonTypes = 'getPokemonTypes',
 }
 
 export default Endpoints;

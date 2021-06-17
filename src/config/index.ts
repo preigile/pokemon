@@ -1,4 +1,4 @@
-export const config = {
+const config = {
   client: {
     server: {
       protocol: 'http',
@@ -15,6 +15,12 @@ export const config = {
         method: 'GET',
         uri: {
           pathname: '/api/v1/pokemon/{id}',
+        },
+      },
+      getPokemonTypes: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v1/types',
         },
       },
       // Fake API
